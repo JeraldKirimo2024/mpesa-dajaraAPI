@@ -94,7 +94,7 @@ public class DarajaApiImpl implements DarajaApi {
                 } else {
                     return ResponseEntity.ok().body("STK Push failed: " + okPushResponse.getResponseDescription());
                 }
-            } else {  
+            } else {
                 errorPushResponse errorPushResponse = objectMapper.readValue(responseBody, errorPushResponse.class);
                 return ResponseEntity.ok().body("STK Push failed:   " + errorPushResponse.toString());
             }
