@@ -2,11 +2,13 @@ package com.alex.mpesadaraja.MpesaController;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alex.mpesadaraja.dtos.sendPushRequest;
+import com.alex.mpesadaraja.dtos.callback.StkCallbackRequest;
 import com.alex.mpesadaraja.service.DarajaApiImpl;
 
 @RestController
@@ -40,4 +42,11 @@ public class MpesaController {
         }
 
     }
+
+    @PostMapping("/callback")
+    public void callback(@RequestBody StkCallbackRequest stkCallbackRequest) throws Exception {
+        darajaApiImpl.callback(stkCallbackRequest);
+
+    }
+
 }
