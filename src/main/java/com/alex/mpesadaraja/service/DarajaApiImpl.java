@@ -8,6 +8,7 @@ import com.alex.mpesadaraja.config;
 import com.alex.mpesadaraja.dtos.AccessTokenResponse;
 import com.alex.mpesadaraja.dtos.errorPushResponse;
 import com.alex.mpesadaraja.dtos.okPushResponse;
+import com.alex.mpesadaraja.dtos.callback.StkCallBack;
 import com.alex.mpesadaraja.dtos.callback.StkCallbackRequest;
 import com.alex.mpesadaraja.utils.HelperUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -103,21 +104,20 @@ public class DarajaApiImpl implements DarajaApi {
         }
     }
 
-    public void CallBack throws Exception
-    {
-        // Sample JSON response
+    public void callback(StkCallbackRequest stkCallbackRequest) throws Exception {
         String jsonResponse = "{ \"Body\": { \"stkCallback\": { \"MerchantRequestID\": \"29115-34620561-1\", \"CheckoutRequestID\": \"ws_CO_191220191020363925\", \"ResultCode\": 0, \"ResultDesc\": \"The service request is processed successfully.\", \"CallbackMetadata\": { \"Item\": [ { \"Name\": \"Amount\", \"Value\": 1.00 }, { \"Name\": \"MpesaReceiptNumber\", \"Value\": \"NLJ7RT61SV\" }, { \"Name\": \"TransactionDate\", \"Value\": 20191219102115 }, { \"Name\": \"PhoneNumber\", \"Value\": 254708374149 } ] } } } }";
 
-        // Create ObjectMapper instance
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Deserialize JSON response into StkCallbackRequest object
-        StkCallbackRequest stkCallbackRequest = objectMapper.readValue(jsonResponse, StkCallbackRequest.class);
+        StkCallbackRequest StkCallbackRequest = objectMapper.readValue(jsonResponse, StkCallbackRequest.class);
 
         // Now you can access the parsed data
-        StkCallback stkCallback = stkCallbackRequest.getBody().getStkCallback();
+
+        StkCallBack stkCallback = StkCallbackRequest.getBody().getStkCallback();
+
         System.out.println("Merchant Request ID: " + stkCallback.getMerchantRequestId());
         System.out.println("Checkout Request ID: " + stkCallback.getCheckoutRequestId());
-        // Similarly, access other fields as needed
+
     }
 }

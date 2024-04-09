@@ -1,8 +1,13 @@
 package com.alex.mpesadaraja.dtos.callback;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class stkCallBack {
+import lombok.Data;
+import lombok.SneakyThrows;
+
+@Data
+public class StkCallBack {
     @JsonProperty("MerchantRequestID")
     private String merchantRequestId;
 
@@ -10,7 +15,7 @@ public class stkCallBack {
     private String checkoutRequestId;
 
     @JsonProperty("ResultCode")
-    private int resultCode;
+    private String resultCode;
 
     @JsonProperty("ResultDesc")
     private String resultDesc;
@@ -18,5 +23,11 @@ public class stkCallBack {
     @JsonProperty("CallbackMetadata")
     private CallbackMetadata callbackMetadata;
 
-    // Getters and setters
+    @SneakyThrows
+    @Override
+    public String toString() {
+
+        return new ObjectMapper().writeValueAsString(this);
+    }
+
 }
